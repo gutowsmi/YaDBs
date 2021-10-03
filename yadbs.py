@@ -31,15 +31,24 @@ for connection in connections:
     dbs = connection['db']
     backup_path = connection['backup-path']
     filestamp = time.strftime(connection['data-stamp'])
+    folder = time.strftime("%Y-%m-%d")
 
     if backup_path == "":
         backup_path = "./backups/"
+    else:
+        if not os.path.exists(backup_path):
+            os.mkdir(backup_path)
 
+    final_path = os.path.join(backup_path, folder)
+    if not os.path.exists(final_path):
+        os.mkdir(final_path)
     for db in dbs:
+        file_name = final_path+"/"+filestamp + "_" + db + ".sql"
         dumpcmd = "mysqldump -h " + host + " -u " + user + " --password=" + \
             password + " " + db + " --no-tablespaces > " + \
-            pipes.quote(backup_path+filestamp) + "_" + db + ".sql"
+            pipes.quote(file_name)
         os.system(dumpcmd)
+        os.system("gzip " + file_name)
 
     if (connection['check-in']):
         try:
