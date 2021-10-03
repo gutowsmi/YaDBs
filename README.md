@@ -1,5 +1,5 @@
 # YaDBs - Yet Another Database Backup Script
-### What is purpose od this script?
+### What is purpose of this script?
 This python script supports backing up multiple databases on multiple hosts in single file. It accepts connection details in json file. 
 
 ### Requirements
