@@ -1,0 +1,3 @@
+settings_debug.json
+.vscode/settings.json
+backups/*.sql

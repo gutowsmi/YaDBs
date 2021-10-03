@@ -1,0 +1,15 @@
+{
+    "database":[
+        {
+            "id": 1,
+            "host": "1.2.3.4",
+            "user": "user",
+            "password": "password",
+            "db": ["db"],
+            "check-in": true,
+            "req-url": "url",
+            "data-stamp": "%Y-%m-%d-%H-%M-%S",
+            "backup-path": ""
+        }
+    ]
+}
