@@ -17,10 +17,10 @@ if len(parameters) > 1:
             settingsFile = open(r'./settings.json')
         except:
             print("JSON file is missing")
-    try:
-        settings = json.load(settingsFile)
-    except:
-        print("Error in json file")
+try:
+    settings = json.load(settingsFile)
+except:
+    print("Error in json file")
 connections = settings['database']
 
 for connection in connections:
