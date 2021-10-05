@@ -2,4 +2,5 @@ settings_debug.json
 .vscode/settings.json
 backups/*.sql
 backups/*/*.sql
+backups/*/*
 settings.json

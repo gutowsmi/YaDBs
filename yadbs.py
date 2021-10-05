@@ -5,16 +5,17 @@ import time
 import sys
 import os
 import pipes
+dir_path = os.path.dirname(os.path.realpath(__file__))
 parameters = sys.argv
 if len(parameters) > 1:
     if sys.argv[1] == "debug":
         try:
-            settingsFile = open(r'./settings_debug.json')
+            settingsFile = open(os.path.join(dir_path, 'settings_debug.json'))
         except:
             print("JSON file is missing")
 else:
     try:
-        settingsFile = open(r'./settings.json')
+        settingsFile = open(os.path.join(dir_path, 'settings.json'))
     except:
         print("JSON file is missing")
 try:
@@ -34,11 +35,10 @@ for connection in connections:
     folder = time.strftime("%Y-%m-%d")
 
     if backup_path == "":
-        backup_path = "./backups/"
+        backup_path = os.path.join(dir_path, 'backups')
     else:
         if not os.path.exists(backup_path):
             os.mkdir(backup_path)
-
     final_path = os.path.join(backup_path, folder)
     if not os.path.exists(final_path):
         os.mkdir(final_path)
