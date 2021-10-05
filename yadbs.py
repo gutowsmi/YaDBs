@@ -12,11 +12,11 @@ if len(parameters) > 1:
             settingsFile = open(r'./settings_debug.json')
         except:
             print("JSON file is missing")
-    else:
-        try:
-            settingsFile = open(r'./settings.json')
-        except:
-            print("JSON file is missing")
+else:
+    try:
+        settingsFile = open(r'./settings.json')
+    except:
+        print("JSON file is missing")
 try:
     settings = json.load(settingsFile)
 except:
