@@ -30,22 +30,35 @@ for connection in connections:
     user = connection['user']
     password = connection['password']
     dbs = connection['db']
+    recursiveMode = True
     backup_path = connection['backup-path']
-    filestamp = time.strftime(connection['data-stamp'])
+    filestamp = time.strftime(connection['date-stamp'])
     folder = time.strftime("%Y-%m-%d")
 
+    if isinstance(dbs, str) and dbs == "all-databases":
+        recursiveMode = False
+    elif not isinstance(dbs, list) and dbs != "all-databases":
+        print("Error in settings.json. Value of db is not array nor is it equal to 'all-databases'")
     if backup_path == "":
         backup_path = os.path.join(dir_path, 'backups')
+    if recursiveMode:
+        for db in dbs:
+            final_path = os.path.join(backup_path, folder, host)
+            if not os.path.exists(final_path):
+                os.makedirs(final_path)
+            file_name = final_path+"/"+filestamp + "_" + db + ".sql"
+            dumpcmd = "mysqldump -h " + host + " -u " + user + " --password=" + \
+                password + " " + db + " --no-tablespaces > " + \
+                pipes.quote(file_name)
+            os.system(dumpcmd)
+            os.system("gzip " + file_name)
     else:
-        if not os.path.exists(backup_path):
-            os.mkdir(backup_path)
-    final_path = os.path.join(backup_path, folder)
-    if not os.path.exists(final_path):
-        os.mkdir(final_path)
-    for db in dbs:
-        file_name = final_path+"/"+filestamp + "_" + db + ".sql"
+        final_path = os.path.join(backup_path, folder, host)
+        if not os.path.exists(final_path):
+            os.makedirs(final_path)
+        file_name = final_path+"/"+filestamp + "_allDatabases.sql"
         dumpcmd = "mysqldump -h " + host + " -u " + user + " --password=" + \
-            password + " " + db + " --no-tablespaces > " + \
+            password + " --all-databases --no-tablespaces > " + \
             pipes.quote(file_name)
         os.system(dumpcmd)
         os.system("gzip " + file_name)

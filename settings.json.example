@@ -1,15 +1,15 @@
 {
     "database":[
         {
-            "id": 1,
-            "host": "1.2.3.4",
-            "user": "user",
-            "password": "password",
-            "db": ["db"],
-            "check-in": true,
-            "req-url": "url",
-            "data-stamp": "%Y-%m-%d-%H-%M-%S",
-            "backup-path": ""
+            "id": 1, // id of connection
+            "host": "1.2.3.4", //database server ip address or domain name
+            "user": "user", //database user
+            "password": "password", //user's password
+            "db": ["db"], // array of databases to backup or accepts all-databases ie "db": "all-databases",
+            "check-in": true, //check in enabled or disabled, sends a get request to url
+            "req-url": "url", //url for check in
+            "date-stamp": "%Y-%m-%d-%H-%M-%S", //format of data stamp of a folder
+            "backup-path": "" //path where backups will be stored
         }
     ]
 }
