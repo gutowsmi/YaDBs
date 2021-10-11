@@ -4,3 +4,4 @@ backups/*.sql
 backups/*/*.sql
 backups/*/*
 settings.json
+docker/dockerfile
